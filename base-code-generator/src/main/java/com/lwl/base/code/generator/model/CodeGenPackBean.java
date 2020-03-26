@@ -20,6 +20,8 @@ public class CodeGenPackBean {
     /***/
     private String servicePack;
     /***/
+    private String serviceIpmlPack;
+    /***/
     private String daoPack;
     /***/
     private String mapperPack;
@@ -36,6 +38,7 @@ public class CodeGenPackBean {
         this.controllerPack = packBase + codePackConfig.getPackController();
         this.beanPack = packBase + codePackConfig.getPackBean();
         this.servicePack = packBase + codePackConfig.getPackService();
+        this.serviceIpmlPack = servicePack + ".impl";
         this.daoPack = packBase + codePackConfig.getPackDao();
         this.mapperPack = packBase + codePackConfig.getPackMapper();
         this.webPack = codePackConfig.getPackWeb();
@@ -64,6 +67,10 @@ public class CodeGenPackBean {
         return packOutput(this.servicePack);
     }
 
+    public String getServiceImplOutput() {
+        return packOutput(this.serviceIpmlPack);
+    }
+
     public String getDaoOutput() {
         return packOutput(this.daoPack);
     }
@@ -83,7 +90,10 @@ public class CodeGenPackBean {
      */
     private String packOutput(String pack) {
         if (StringUtils.isEmpty(codePackConfig.getOutputBase())) {
-            return String.format("%s\\src\\main\\java\\%s", System.getProperty("user.dir"), pack.replaceAll("\\.", "\\\\"));
+            String projectName = "\\base-code-generator";
+            String dir = System.getProperty("user.dir");
+            dir = dir.contains(projectName) ? dir : dir + projectName;
+            return String.format("%s\\src\\main\\java\\%s", dir, pack.replaceAll("\\.", "\\\\"));
         }
         return codePackConfig.getOutputBase() + pack.replaceAll("\\.", "\\\\");
     }

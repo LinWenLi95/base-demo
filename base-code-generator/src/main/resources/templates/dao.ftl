@@ -1,5 +1,6 @@
 package ${codeConfig.daoPack};
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import ${codeConfig.beanPack}.${beanName?cap_first};
 
 /**
@@ -8,6 +9,6 @@ import ${codeConfig.beanPack}.${beanName?cap_first};
 * @since ${copyRight.since?string("yyyy/MM/dd")}
 * @version ${copyRight.version}
 */
-public interface ${beanName?cap_first}Mapper<T extends ${beanName?cap_first}> extends IMapper<T> {
+public interface ${beanName?cap_first}Mapper<T extends ${beanName?cap_first}> extends BaseMapper<T> {
 
 }

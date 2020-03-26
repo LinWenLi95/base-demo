@@ -8,8 +8,8 @@ code-generator:
     password: MysqL@951QwdC
   # code gen pack
   generate:
-    outputBase: D:/code/ # 放空该项则代码生成到当前项目中
-    packBase: com.lwl.base.code.generator
+    outputBase:  # 放空该项则代码生成到当前项目中
+    packBase: com.lwl.base.code.gen
     packBean: pojo
     packApi: api
     packController: controller

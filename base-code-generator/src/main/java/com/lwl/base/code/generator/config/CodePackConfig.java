@@ -23,6 +23,8 @@ public class CodePackConfig {
     private String packController;
     /**service代码文件路径 例：service*/
     private String packService;
+    /**service代码文件路径 例：serviceImpl*/
+    private String packServiceImpl;
     /**dao接口代码文件路径 例：dao*/
     private String packDao;
     /**mapper代码文件路径 例：mapper*/

@@ -58,6 +58,12 @@ public class EntityBean {
         return dir + "/" + StringUtils.capitalize(this.beanName) + "Service.java";
     }
 
+    public String getServiceImplOutput() {
+        String dir = this.codeConfig.getServiceImplOutput();
+        FileUtil.createIfNoExist(dir);
+        return dir + "/" + StringUtils.capitalize(this.beanName) + "ServiceImpl.java";
+    }
+
     public String getDaoOutput() {
         String dir = this.codeConfig.getDaoOutput();
         FileUtil.createIfNoExist(dir);
