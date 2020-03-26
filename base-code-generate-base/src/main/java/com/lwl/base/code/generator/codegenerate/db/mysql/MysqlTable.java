@@ -1,0 +1,32 @@
+package com.lwl.base.code.generator.codegenerate.db.mysql;
+
+import com.lwl.base.code.generator.codegenerate.db.JavaConverter;
+import com.lwl.base.code.generator.codegenerate.model.EntityBean;
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * 数据库表信息对象（表名、表说明、列信息）
+ * @author Admin
+ */
+@Data
+public class MysqlTable implements JavaConverter<EntityBean> {
+
+    /**表名*/
+    private String name;
+    /**表说明*/
+    private String comment;
+    /**列信息对象列表*/
+    private List<MysqlColumn> fields;
+
+    public MysqlTable(String name, String comment) {
+        this.name = name;
+        this.comment = comment;
+    }
+
+    @Override
+    public EntityBean convert() {
+        return new EntityBean(this.name, this.comment);
+    }
+}

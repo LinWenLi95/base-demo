@@ -1,0 +1,21 @@
+# mysql connection
+db:
+  driverClass:com.mysql.cj.jdbc.Driver
+  url:jdbc:mysql://47.106.198.29:3306/db_test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+  userName:root
+  password:MysqL@951QwdC
+# code gen pack
+code:
+  packBase:com.lwl
+  packBean:pojo
+  packApi:api
+  packController:controller
+  packService:service
+  packDao:dao
+  packMapper:mapper
+  packWeb:com/lwl/web
+  outputBase:D:/epgame/
+# copy right config
+copyright:
+  author:lwl
+  version:1.0

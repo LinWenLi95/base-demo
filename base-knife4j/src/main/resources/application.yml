@@ -1,0 +1,4 @@
+spring:
+  #应用名
+  application:
+    name: base-knife4j

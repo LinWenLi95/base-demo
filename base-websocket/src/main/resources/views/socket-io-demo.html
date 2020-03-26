@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>NETTY SOCKET.IO DEMO</title>
+    <base>
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/socket.io/2.1.0/socket.io.js"></script>
+    <style>
+        body {
+            padding: 20px;
+        }
+        #console {
+            height: 450px;
+            overflow: auto;
+        }
+        .username-msg {
+            color: orange;
+        }
+        .connect-msg {
+            color: green;
+        }
+        .disconnect-msg {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="console" class="well"></div>
+	<input id="msg" type="text" />
+    <button id="submit" type="button">发送</button>
+
+    <button id="joinBtn" type="button">进入房间</button>
+    <button id="leaveBtn" type="button">离开房间</button>
+</body>
+<script type="text/javascript">
+    var socket;
+
+    $("#joinBtn").on("click",function (event) {
+        if (socket === null){
+            console.log("进入房间");
+            connectSocketIO();
+            alert(socket.isConnected());
+        }else {
+
+        }
+
+    });
+    $("#leaveBtn").on("click",function (event) {
+        console.log("离开房间");
+        socket.disconnect();
+    });
+
+    /*连接socketio*/
+    function connectSocketIO() {
+        socket = io.connect('ws://192.168.0.102:9099?userId=1', {path: '/game'});
+		//定义监听事件及事件内容(当服务端调用匹配事件时，客户端执行事件内容)
+        socket.on('connect', function () {
+            console.log("socket已连接");
+            output('<span class="connect-msg">连接成功</span>');
+        });
+        socket.on('disconnect', function () {
+            console.log("socket已断开");
+            output('<span class="disconnect-msg">' + '已下线! </span>');
+        });
+
+        // 自定义事件
+        socket.on('serverMsgEvent', function (data) {
+            console.log(data);
+            output('<span class="username-msg">' + data + ' </span>');
+        });
+    }
+
+    /*输出信息*/
+    function output(message) {
+        var element = $("<div>" + message + "</div>");
+        $('#console').prepend(element);
+    }
+
+	$("#submit").on("click",function(){
+        const $msg = $("#msg");
+        const msg = $msg.val();
+        if (msg != null && msg !== ""){
+            // 指定事件名，提交数据到服务器，服务器端监听clientMsgEvent事件将会收到数据并处理
+            socket.emit("clientMsgEvent", msg);
+            $msg.val("");
+        }else {
+            alert("不能发送空数据");
+        }
+	})
+
+</script>
+</html>
