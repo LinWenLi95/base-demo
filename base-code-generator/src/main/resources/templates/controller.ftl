@@ -1,15 +1,9 @@
-package ${codeConfig.apiPack};
+package ${codeConfig.controllerPack};
 
 import ${codeConfig.servicePack}.${beanName?cap_first}Service;
-import com.base.BaseApi;
-import com.base.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -19,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 * @version ${copyRight.version}
 */
 @Controller
-@RequestMapping("/admin/${beanName}")
-public class ${beanName?cap_first}Controller extends BaseApi {
+@RequestMapping("/${beanName}")
+public class ${beanName?cap_first}Controller {
 
     @Autowired
     ${beanName?cap_first}Service ${beanName}Service;

@@ -1,6 +1,7 @@
 package com.lwl.base.code.generator.db.mysql;
 import	java.util.Arrays;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lwl.base.code.generator.db.DbHandler;
 import com.lwl.base.code.generator.db.DbHelper;
 import com.lwl.base.code.generator.model.ColumnBean;
@@ -43,20 +44,19 @@ public class Mysql57DbHandler implements DbHandler {
     public EntityBean byTableName(String tableName) {
         // 获取表状态信息
         String showTableSql = SHOW_TABLE_STATUS_SQL.replaceAll("\\?", tableName);
-        List<Map<String, String>> tableInfos = dbHelper.queryTableInfoByTableName(showTableSql, new String[]{"Name", "Comment"});
-        Map<String, String> tableInfo = tableInfos.get(0);
-        MysqlTable dbTable = new MysqlTable(tableInfo.get("Name"), tableInfo.get("Comment"));
+        List<JSONObject> tableInfos = dbHelper.queryTableInfoByTableName(showTableSql, new String[]{"Name", "Comment"});
+        JSONObject tableInfo = tableInfos.get(0);
+        MysqlTable dbTable = new MysqlTable(tableInfo.getString("Name"), tableInfo.getString("Comment"));
         EntityBean entityBean = dbTable.convert();
         // 获取表的列信息
         String showFieldSql = SHOW_ALL_FIELD_SQL.replaceAll("\\?", tableName);
-        List<Map<String, String>> fields = dbHelper.queryTableInfoByTableName(showFieldSql, null);
+        List<JSONObject> fields = dbHelper.queryTableInfoByTableName(showFieldSql, null);
         // 列信息转Java对象
         List<ColumnBean> columnBeans = new ArrayList<>();
         List<String> imports = new ArrayList<>();
-        ColumnBean columnBean;
-        for (Map<String, String> field : fields) {
-            MysqlColumn dbField = new MysqlColumn(field.get("Field"), field.get("Type"), Boolean.parseBoolean(field.get("Null")), field.get("Comment"));
-            columnBean = dbField.convert();
+        for (JSONObject field : fields) {
+            MysqlColumn dbField = new MysqlColumn(field.getString("Field"), field.getString("Type"), Boolean.parseBoolean(field.getString("Null")), field.getString("Comment"));
+            ColumnBean columnBean = dbField.convert();
             columnBeans.add(columnBean);
             if (!imports.contains(columnBean.getTypeImport())) {
                 imports.add(columnBean.getTypeImport());

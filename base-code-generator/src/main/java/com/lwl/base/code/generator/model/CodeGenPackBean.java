@@ -12,8 +12,6 @@ import org.springframework.util.StringUtils;
 @Data
 public class CodeGenPackBean {
     /***/
-    private String apiPack;
-    /***/
     private String controllerPack;
     /***/
     private String beanPack;
@@ -34,7 +32,6 @@ public class CodeGenPackBean {
 
     public CodeGenPackBean() {
         String packBase = codePackConfig.getPackBase() + ".";
-        this.apiPack = packBase + codePackConfig.getPackApi();
         this.controllerPack = packBase + codePackConfig.getPackController();
         this.beanPack = packBase + codePackConfig.getPackBean();
         this.servicePack = packBase + codePackConfig.getPackService();
@@ -49,10 +46,6 @@ public class CodeGenPackBean {
             codeGenPackBean = new CodeGenPackBean();
         }
         return codeGenPackBean;
-    }
-
-    public String getApiOutput() {
-        return packOutput(this.apiPack);
     }
 
     public String getControllerOutput() {

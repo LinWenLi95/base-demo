@@ -1,5 +1,6 @@
 package com.lwl.base.code.generator.db;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lwl.base.code.generator.config.CodeGenConfigs;
 import com.lwl.base.code.generator.config.JdbcConfig;
 import org.slf4j.Logger;
@@ -86,12 +87,12 @@ public class DbHelper {
      * @param tableName 表名 查询条件
      * @return Map<String, String>
      */
-    public List<Map<String, String>> queryTableInfoByTableName(String sql, String[] justIncludes, Object... tableName) {
-        Map<String, String> stringMap = executeQuery(rs -> {
-            Map<String, String> map = new HashMap<>(16);
+    public List<JSONObject> queryTableInfoByTableName(String sql, String[] justIncludes, Object... tableName) {
+        return executeQuery(rs -> {
             if (rs == null) {
-                return map;
+                return null;
             }
+            List<JSONObject> list = new ArrayList<>();
             try {
                 // 数组转列表
                 List<String> includeList;
@@ -103,23 +104,23 @@ public class DbHelper {
                 // 取得符合条件的数据
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnCount = metaData.getColumnCount();
+
                 while (rs.next()) {
+                    JSONObject jsonObject = new JSONObject();
                     for (int i = 1; i <= columnCount; i++) {
                         if (includeList.isEmpty()) {
-                            map.put(metaData.getColumnLabel(i), rs.getString(i));
+                            jsonObject.put(metaData.getColumnLabel(i), rs.getString(i));
                         } else if (includeList.contains(metaData.getColumnLabel(i))) {
-                            map.put(metaData.getColumnLabel(i), rs.getString(i));
+                            jsonObject.put(metaData.getColumnLabel(i), rs.getString(i));
                         }
                     }
+                    list.add(jsonObject);
                 }
             } catch (SQLException e) {
                 LOGGER.error("DbHelper queryList1Object err:" + e.getMessage() + ",sqlState=" + e.getSQLState());
             }
-            return map;
+            return list;
         }, sql, tableName);
-        List<Map<String, String>> list = new ArrayList<>();
-        list.add(stringMap);
-        return list;
     }
 
 

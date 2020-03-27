@@ -15,8 +15,8 @@ public interface CodeGenerator {
     /**生成Service*/
     void generateService();
 
-    /**生成ApiController*/
-    void generateApi();
+    /**生成Controller*/
+    void generateController();
 
     /**生成web资源页面及js*/
     void generateWebResource();
@@ -26,7 +26,6 @@ public interface CodeGenerator {
         generateBean();
         generateDao();
         generateService();
-        generateApi();
-        generateWebResource();
+        generateController();
     };
 }

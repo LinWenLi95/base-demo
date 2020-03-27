@@ -1,7 +1,6 @@
 package ${codeConfig.servicePack};
 
 import ${codeConfig.beanPack}.${beanName?cap_first};
-import ${codeConfig.daoPack}.${beanName?cap_first}Mapper;
 
 /**
 * ${beanDesc}Service接口

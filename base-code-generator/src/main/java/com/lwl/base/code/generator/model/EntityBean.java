@@ -34,12 +34,6 @@ public class EntityBean {
         this.copyRight = CodeGenConfigs.copyRightConfig;
     }
 
-    public String getApiOutput() {
-        String dir = this.codeConfig.getApiOutput();
-        FileUtil.createIfNoExist(dir);
-        return dir + "/" + StringUtils.capitalize(this.beanName) + "Api.java";
-    }
-
     public String getControllerOutput() {
         String dir = this.codeConfig.getControllerOutput();
         FileUtil.createIfNoExist(dir);
@@ -56,6 +50,12 @@ public class EntityBean {
         String dir = this.codeConfig.getServiceOutput();
         FileUtil.createIfNoExist(dir);
         return dir + "/" + StringUtils.capitalize(this.beanName) + "Service.java";
+    }
+
+    public String getBaseServiceOutput() {
+        String dir = this.codeConfig.getServiceOutput();
+        FileUtil.createIfNoExist(dir);
+        return dir + "/" + "BaseService.java";
     }
 
     public String getServiceImplOutput() {

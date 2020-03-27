@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ${codeConfig.beanPack}.${beanName?cap_first};
 import ${codeConfig.daoPack}.${beanName?cap_first}Mapper;
+import ${codeConfig.servicePack}.${beanName?cap_first}Service;
 
 /**
 * ${beanDesc}Service类
