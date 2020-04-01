@@ -1,7 +1,7 @@
 package com.lwl.base.code.generator.db;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lwl.base.code.generator.config.CodeGenConfigs;
+import com.lwl.base.code.generator.util.YamlConfigUtil;
 import com.lwl.base.code.generator.config.JdbcConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class DbHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(DbHelper.class);
     
     private Connection connection = null;
-    private static JdbcConfig jdbcConfig = CodeGenConfigs.jdbcConfig;
+    private static JdbcConfig jdbcConfig = YamlConfigUtil.jdbcConfig;
 
     static {
         // 验证jdbc驱动是否存在

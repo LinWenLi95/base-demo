@@ -1,16 +1,12 @@
 package com.lwl.base.code.generator.config;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * 代码文件生成路径配置
  * @author Admin
  */
 @Data
-@Component
-@ConfigurationProperties(prefix = "code-generator.generate")
 public class CodePackConfig {
 
     /**代码文件根路径 例：com.lwl.base.demo*/

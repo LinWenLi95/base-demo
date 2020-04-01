@@ -1,9 +1,9 @@
 package com.lwl.base.code.generator.model;
 
 import com.lwl.base.code.generator.config.CodeCopyRightConfig;
-import com.lwl.base.code.generator.config.CodeGenConfigs;
 import com.lwl.base.code.generator.util.FileUtil;
 import com.lwl.base.code.generator.util.StringUtil;
+import com.lwl.base.code.generator.util.YamlConfigUtil;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
@@ -31,7 +31,7 @@ public class EntityBean {
         this.tableName = tableName;
         this.beanDesc = beanDesc;
         this.codeConfig = CodeGenPackBean.getInstance();
-        this.copyRight = CodeGenConfigs.copyRightConfig;
+        this.copyRight = YamlConfigUtil.copyRightConfig;
     }
 
     public String getControllerOutput() {

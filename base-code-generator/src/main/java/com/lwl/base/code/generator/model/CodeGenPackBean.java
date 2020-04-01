@@ -1,7 +1,7 @@
 package com.lwl.base.code.generator.model;
 
-import com.lwl.base.code.generator.config.CodeGenConfigs;
 import com.lwl.base.code.generator.config.CodePackConfig;
+import com.lwl.base.code.generator.util.YamlConfigUtil;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
@@ -26,7 +26,7 @@ public class CodeGenPackBean {
     /***/
     private String webPack;
     /***/
-    private CodePackConfig codePackConfig = CodeGenConfigs.codePackConfig;
+    private CodePackConfig codePackConfig = YamlConfigUtil.codePackConfig;
 
     private static CodeGenPackBean codeGenPackBean;
 
