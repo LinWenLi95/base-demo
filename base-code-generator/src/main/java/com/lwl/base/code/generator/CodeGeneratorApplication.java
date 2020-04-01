@@ -1,10 +1,7 @@
 package com.lwl.base.code.generator;
 
 import com.lwl.base.code.generator.freemarker.FreeMarkerCodeGenerator;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
 
 /**
  * @author P001
@@ -17,10 +14,10 @@ public class CodeGeneratorApplication {
         System.out.println("-------------------Code generate start!-------------------");
         // 指定要生成的表名，可为空
         String[] tableNames = {"sys_user"};
-        FreeMarkerCodeGenerator codeGenerator = new FreeMarkerCodeGenerator(tableNames);
         // 生成对应代码
+        FreeMarkerCodeGenerator codeGenerator = new FreeMarkerCodeGenerator(tableNames);
         codeGenerator.generateAll();
-        long end = System.currentTimeMillis();
-        System.out.println(String.format("-------------------Code generate complete!Execute %s ms-------------------", end - start));
+        System.out.println("-------------------Code generate complete!-------------------");
+        System.out.println(String.format("-------------------Execute %s ms!-------------------", System.currentTimeMillis() - start));
     }
 }
