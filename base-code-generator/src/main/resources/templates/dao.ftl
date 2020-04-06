@@ -1,13 +1,12 @@
 package ${codeConfig.daoPack};
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lwl.base.code.common.mapper.BaseMapper;
 import ${codeConfig.beanPack}.${beanName?cap_first};
 
 /**
 * ${beanDesc}数据库操作接口类
 * @author ${copyRight.author}
-* @since ${copyRight.since?string("yyyy/MM/dd")}
-* @version ${copyRight.version}
+* @date ${copyRight.since?string("yyyy/MM/dd")}
 */
 public interface ${beanName?cap_first}Mapper<T extends ${beanName?cap_first}> extends BaseMapper<T> {
 

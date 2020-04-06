@@ -11,7 +11,7 @@ ${imp}
 /**
 * ${beanDesc}
 * @author ${copyRight.author}
-* @since ${copyRight.since?string("yyyy/MM/dd")}
+* @date ${copyRight.since?string("yyyy/MM/dd")}
 */
 @Data
 public class ${beanName?cap_first} implements Serializable {

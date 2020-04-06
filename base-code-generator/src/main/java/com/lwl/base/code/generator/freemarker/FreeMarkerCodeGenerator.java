@@ -45,7 +45,6 @@ public class FreeMarkerCodeGenerator implements CodeGenerator {
     @Override
     public void generateService() {
         for (EntityBean entityBean : this.entityBeans) {
-            FreeMarkerResourceLoader.process("baseService.ftl", entityBean, entityBean.getBaseServiceOutput());
             FreeMarkerResourceLoader.process("service.ftl", entityBean, entityBean.getServiceOutput());
             FreeMarkerResourceLoader.process("serviceImpl.ftl", entityBean, entityBean.getServiceImplOutput());
         }

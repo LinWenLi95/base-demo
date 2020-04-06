@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 public class StringUtil {
 
     /**
-     * 表字段转驼峰
+     * 下划线转驼峰
      *      例：user_id -> userId
      * @param name 字段名
      * @return str
@@ -25,4 +25,27 @@ public class StringUtil {
         }
         return builder.toString();
     }
+
+    /**
+     * 驼峰转下划线
+     *      例：userId -> user_id
+     * @param name 字段名
+     * @return str
+     */
+    public static String camelCaseToUnderscore(String name) {
+        if (StringUtils.isEmpty(name)) {
+            return null;
+        }
+        int len = name.length();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            char c = name.charAt(i);
+            if (Character.isUpperCase(c)) {
+                sb.append("_");
+            }
+            sb.append(Character.toLowerCase(c));
+        }
+        return sb.toString();
+    }
+
 }

@@ -49,10 +49,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.62</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.2.0</version>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>

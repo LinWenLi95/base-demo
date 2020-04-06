@@ -10,7 +10,7 @@ code-generator:
   generate:
     outputBase:  # 放空该项则代码生成到当前项目中
     packBase: com.lwl.base.code.gen
-    packBean: pojo
+    packBean: entity.pojo
     packApi: api
     packController: controller
     packService: service
@@ -38,3 +38,13 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+mybatis:
+  type-aliases-package: com.lwl.base.code.gen.entity.pojo
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 打印sql
+logging:
+  level:
+    com.lwl.base.code.gen.dao : debug
