@@ -22,6 +22,16 @@ import java.util.Map;
 @RequestMapping("/users")
 public class SysUserController {
 
+    @RequestMapping("/api/guest")
+    public String get() {
+        return "guest";
+    }
+
+    @RequestMapping("/api/admin")
+    public String getadmin() {
+        return "admin";
+    }
+
     @Autowired
     SysUserService sysUserService;
 

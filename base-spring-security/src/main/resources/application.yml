@@ -1,5 +1,10 @@
 
 spring:
+  security:
+    user:
+      name: root
+      password: root
+      roles: admin
   #数据库
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
