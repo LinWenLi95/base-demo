@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lwl.base.spring.security.dao.SysUserMapper">
+
+    <!-- 查询单条记录（主键ID查询） -->
+    <select id="selectById" resultType="com.lwl.base.spring.security.entity.pojo.SysUser">
+        SELECT
+        <if test="columns==null ">
+            <include refid="allColumns"/>
+        </if>
+        <if test="columns!=null ">
+            <foreach item="item" index="index" collection="columns" separator=",">
+                ${item}
+            </foreach>
+        </if>
+        FROM sys_user
+        WHERE id=#{id}
+        LIMIT 1
+    </select>
+
+    <!-- 查询单条记录（map条件查询） -->
+    <select id="selectByMap" resultType="com.lwl.base.spring.security.entity.pojo.SysUser">
+        SELECT
+        <if test="columns==null ">
+            <include refid="allColumns"/>
+        </if>
+        <if test="columns!=null ">
+            <foreach item="item" index="index" collection="columns" separator=",">
+                ${item}
+            </foreach>
+        </if>
+        FROM sys_user
+        <include refid="sqlQueryWhere"/>
+        ORDER BY create_time DESC
+        LIMIT 1
+    </select>
+
+    <!-- 分页查询（map条件查询）-->
+    <select id="selectPage" parameterType="map" resultType="com.lwl.base.spring.security.entity.pojo.SysUser">
+        SELECT
+        <if test="columns==null ">
+            <include refid="allColumns"/>
+        </if>
+        <if test="columns!=null ">
+            <foreach item="item" index="index" collection="columns" separator=",">
+                ${item}
+            </foreach>
+        </if>
+        FROM sys_user
+        <include refid="sqlQueryWhere"/>
+        <if test="order_by==null or order_by=='' or sort==null or sort==''">
+            ORDER BY create_time DESC
+        </if>
+        <if test="order_by!=null and order_by!='' and sort!=null and sort!=''">
+            ORDER BY ${order_by} ${sort}
+        </if>
+        <if test="offset==null and limit!=null">
+            LIMIT ${limit}
+        </if>
+        <if test="offset!=null and limit!=null">
+            LIMIT #{offset},${limit}
+        </if>
+    </select>
+
+    <!-- 统计数量（map条件查询）-->
+    <select id="count" resultType="int">
+        SELECT COUNT(id)
+        FROM sys_user
+        <include refid="sqlQueryWhere"/>
+        LIMIT 1
+    </select>
+
+    <!-- 添加 单条记录 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sys_user (
+            id,
+            username,
+            password,
+            telephone,
+            email,
+            state,
+            is_del,
+            description,
+            creator_id,
+            create_time,
+            updater_id,
+            update_time,
+            salt
+        )
+        VALUES (
+            #{id},
+            #{username},
+            #{password},
+            #{telephone},
+            #{email},
+            #{state},
+            #{isDel},
+            #{description},
+            #{creatorId},
+            #{createTime},
+            #{updaterId},
+            #{updateTime},
+            #{salt}
+        )
+    </insert>
+
+    <!-- 修改 单条记录 -->
+    <update id="update" parameterType="com.lwl.base.spring.security.entity.pojo.SysUser">
+        UPDATE sys_user
+        <include refid="sqlUpdSet"/>
+        WHERE id=#{id}
+        LIMIT 1
+    </update>
+
+    <!-- 删除 单条记录 -->
+    <delete id="delete" parameterType="com.lwl.base.spring.security.entity.pojo.SysUser">
+        DELETE FROM sys_user
+        WHERE id=#{id}
+        LIMIT 1
+    </delete>
+
+    <!--通用查询SQL-->
+    <sql id="sqlQueryWhere">
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="username!=null and username!=''">
+                and username=#{username}
+            </if>
+            <if test="password!=null and password!=''">
+                and password=#{password}
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                and telephone=#{telephone}
+            </if>
+            <if test="email!=null and email!=''">
+                and email=#{email}
+            </if>
+            <if test="state!=null ">
+                and state=#{state}
+            </if>
+            <if test="isDel!=null ">
+                and is_del=#{isDel}
+            </if>
+            <if test="description!=null and description!=''">
+                and description=#{description}
+            </if>
+            <if test="creatorId!=null ">
+                and creator_id=#{creatorId}
+            </if>
+            <if test="createTime!=null ">
+                and create_time=#{createTime}
+            </if>
+            <if test="updaterId!=null ">
+                and updater_id=#{updaterId}
+            </if>
+            <if test="updateTime!=null ">
+                and update_time=#{updateTime}
+            </if>
+            <if test="salt!=null and salt!=''">
+                and salt=#{salt}
+            </if>
+        </where>
+    </sql>
+
+    <!--通用更新SQL-->
+    <sql id="sqlUpdSet">
+        <set>
+            <if test="username!=null and username!=''">
+                username=#{username},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                telephone=#{telephone},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="state!=null ">
+                state=#{state},
+            </if>
+            <if test="isDel!=null ">
+                is_del=#{isDel},
+            </if>
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+            <if test="creatorId!=null ">
+                creator_id=#{creatorId},
+            </if>
+            <if test="createTime!=null ">
+                create_time=#{createTime},
+            </if>
+            <if test="updaterId!=null ">
+                updater_id=#{updaterId},
+            </if>
+            <if test="updateTime!=null ">
+                update_time=#{updateTime},
+            </if>
+            <if test="salt!=null and salt!=''">
+                salt=#{salt},
+            </if>
+        </set>
+    </sql>
+
+    <!--所有列名（用于替代select *中的*）-->
+    <sql id="allColumns">
+        id,
+        username,
+        password,
+        telephone,
+        email,
+        state,
+        is_del,
+        description,
+        creator_id,
+        create_time,
+        updater_id,
+        update_time,
+        salt
+    </sql>
+
+    <!--身份认证时使用-->
+    <select id="selectByName" resultType="com.lwl.base.spring.security.entity.pojo.SysUser">
+        SELECT
+        id,
+        username,
+        password
+        FROM sys_user
+        WHERE
+        username=#{userName}
+        LIMIT 1
+    </select>
+</mapper>
