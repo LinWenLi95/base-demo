@@ -4,38 +4,28 @@ import com.lwl.base.common.util.HttpRequestUtil;
 import com.lwl.base.common.vo.Page;
 import com.lwl.base.common.vo.Result;
 import com.lwl.base.common.vo.ResultCode;
-import com.lwl.base.spring.security.entity.pojo.SysUser;
-import com.lwl.base.spring.security.service.SysUserService;
+import com.lwl.base.spring.security.entity.pojo.SysRole;
+import com.lwl.base.spring.security.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
 /**
- * 系统 用户表Controller
+ * 系统 角色表Controller
  * @author LinWenLi
- * @date 2020/04/05
+ * @date 2020/04/09
  */
 @RestController
-@RequestMapping("/users")
-public class SysUserController {
-
-    @RequestMapping("/api/guest")
-    public String get() {
-        return "guest";
-    }
-
-    @RequestMapping("/api/admin")
-    public Result<String> getadmin() {
-        return Result.success("admin");
-    }
+@RequestMapping("/sysRole")
+public class SysRoleController {
 
     @Autowired
-    SysUserService sysUserService;
+    SysRoleService sysRoleService;
 
-    /**http://localhost:8080/users?salt=1&current=1&limit=10&order_by=id&sort=asc
+
+    /**http://localhost:8080/sysRoles?current=1&limit=10&order_by=id&sort=asc
      * 查询多条数据
      * @param request 请求对象，以下请求参数：<br/>
      * T对象的属性名（可选,所有属性都可作为条件）<br/>
@@ -43,24 +33,24 @@ public class SysUserController {
      * limit 取出数量（可选，可单独使用）<br/>
      * order_by 排序字段（可选，必须与sort配合使用）<br/>
      * sort 排序方式（可选，值选填：asc|desc，必须与order_by配合使用）
-     * @return Result<Page<SysUser>>
+     * @return Result<Page<SysRole>>
      */
-    @GetMapping
-    public Result<Page<SysUser>> queryList(HttpServletRequest request) {
+    @GetMapping("/")
+    public Result<Page<SysRole>> queryList(HttpServletRequest request) {
         // 将请求参数集合取出
         Map<String, Object> parameterMap = HttpRequestUtil.getParameterMap(request);
-        Page<SysUser> page = sysUserService.queryPage(parameterMap, null);
+        Page<SysRole> page = sysRoleService.queryPage(parameterMap, null);
         return Result.success(page);
     }
 
-    /**http://localhost:8080/users/4
+    /**
      * 查询单条数据
      * @param id 主键
-     * @return Result<SysUser>
+     * @return Result<SysRole>
      */
     @GetMapping("/{id}")
-    public Result<SysUser> queryOne(@PathVariable("id") Integer id) {
-        SysUser t = sysUserService.queryById(id, null);
+    public Result<SysRole> queryOne(@PathVariable("id") Integer id) {
+        SysRole t = sysRoleService.queryById(id, null);
         return Result.success(t);
     }
 
@@ -70,10 +60,10 @@ public class SysUserController {
      * @return Result<Object>
      */
     @PostMapping("/")
-    public Result<Object> add(@RequestBody SysUser obj) {
+    public Result<Object> add(@RequestBody SysRole obj) {
         Integer result = 0;
         if (obj != null) {
-            result = sysUserService.add(obj);
+            result = sysRoleService.add(obj);
         }
         return result > 0 ? Result.success() : Result.success(ResultCode.UNEXPECTED_RESULTS);
     }
@@ -84,10 +74,10 @@ public class SysUserController {
      * @return Result<Object>
      */
     @PutMapping("/")
-    public Result<Object> edit(@RequestBody SysUser obj) {
+    public Result<Object> update(@RequestBody SysRole obj) {
         Integer result = 0;
         if (obj != null) {
-            result = sysUserService.edit(obj);
+            result = sysRoleService.edit(obj);
         }
         return result == 1 ? Result.success() : Result.success(ResultCode.UNEXPECTED_RESULTS);
     }
@@ -98,10 +88,10 @@ public class SysUserController {
      * @return Result<Object>
      */
     @DeleteMapping("/{id}")
-    public Result<Object> remove(@PathVariable("id") Integer id) {
+    public Result<Object> del(@PathVariable("id") Integer id) {
         Integer result = 0;
         if (id != null) {
-            result = sysUserService.remove(id);
+            result = sysRoleService.remove(id);
         }
         return result == 1 ? Result.success() : Result.success(ResultCode.UNEXPECTED_RESULTS);
     }

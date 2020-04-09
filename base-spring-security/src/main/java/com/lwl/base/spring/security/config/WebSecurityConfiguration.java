@@ -96,40 +96,53 @@ package com.lwl.base.spring.security.config;
 //    }
 //}
 
+import com.lwl.base.spring.security.config.jwt.JwtAuthenticationFilter;
+import com.lwl.base.spring.security.config.jwt.JwtAuthorizationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+/**
+ * Spring Security配置类
+ * @author LinWenLi
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private MyFilterSecurityInterceptor myFilterSecurityInterceptor;
 
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        // 使用自定义登录身份认证组件
-////        auth.authenticationProvider(new JwtAuthenticationProvider(userDetailsService));
-//        auth.userDetailsService(userDetailsService);
-//    }
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // 使用自定义登录身份认证组件
+        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // 禁用 csrf, 由于使用的是JWT，我们这里不需要csrf
+        // 禁用 csrf, 使用的是JWT，不需要csrf
         http
                 .csrf().disable()
                 .cors()
                 .and()
                 .authorizeRequests()
-//                // 跨域预检请求
-//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                // 登录URL
-                .antMatchers("/users/api/guest").permitAll()
+                // 跨域预检请求
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                // 登录URL
+                .antMatchers(SecurityConstants.AUTH_LOGIN_URL).permitAll()
                 // 其他所有请求需要身份认证
                 .anyRequest().authenticated()
                 .and()
@@ -137,14 +150,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager()))
+                .addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class)
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        // 退出登录处理器
-//        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
-//        // 开启登录认证流程过滤器
-//        http.addFilterBefore(new JwtLoginFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
-//        // 访问控制时登录状态检查过滤器
-//        http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                // 关闭form表单登录
+                .formLogin().disable()
+                .logout().logoutUrl(SecurityConstants.AUTH_LOGOUT_URL);
     }
 
 }
