@@ -1,0 +1,27 @@
+
+code-generator:
+  # mysql connection
+  jdbc:
+    driverClass: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.106.198.29:3306/db_test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    userName: root
+    password: MysqL@951QwdC
+  # 要生成的表名,英文逗号隔开
+  tables:
+  # code gen pack
+  file-path:
+    # outputBase放空则代码生成到当前项目中,不放空如:   D:\code
+    outputBase:
+    packBase: com.lwl.base.code.generator1
+    packController: controller
+    packService: service
+    packDao: dao
+    # 添加'classpath:'前缀时,将*.xml映射文件生成在resources/mapper资源路径下
+    # 未添加前缀时,*.xml映射文件生成在packBase基础包路径下的mapper包中
+    packMapper: classpath:mapper
+    packBean: entity.pojo
+    packWeb: web
+    packApi: api
+  copyright:
+    author: LinWenLi
+    version: 1.0

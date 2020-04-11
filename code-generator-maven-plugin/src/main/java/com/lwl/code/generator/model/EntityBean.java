@@ -1,9 +1,9 @@
-package com.lwl.base.code.generator.model;
+package com.lwl.code.generator.model;
 
-import com.lwl.base.code.generator.config.CodeCopyRightConfig;
-import com.lwl.base.code.generator.util.FileUtil;
-import com.lwl.base.code.generator.util.StringUtil;
-import com.lwl.base.code.generator.util.YamlConfigUtil;
+import com.lwl.code.generator.config.CodeCopyRightConfig;
+import com.lwl.code.generator.util.FileUtil;
+import com.lwl.code.generator.util.StringUtil;
+import com.lwl.code.generator.util.YamlConfigUtil;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
@@ -31,7 +31,7 @@ public class EntityBean {
         this.tableName = tableName;
         this.beanDesc = beanDesc;
         this.codeConfig = CodeGenPackBean.getInstance();
-        this.copyRight = YamlConfigUtil.copyRightConfig;
+        this.copyRight = YamlConfigUtil.getCopyRightConfig();
     }
 
     public String getControllerOutput() {
@@ -80,10 +80,5 @@ public class EntityBean {
         String dir = this.codeConfig.getWebOutput() + "/" + this.beanName;
         FileUtil.createIfNoExist(dir);
         return dir + "/" + fileName;
-    }
-
-    @Override
-    public String toString() {
-        return "EntityBean{codeConfig=" + this.codeConfig + ", tableName='" + this.tableName + '\'' + ", beanName='" + this.beanName + '\'' + ", beanDesc='" + this.beanDesc + '\'' + ", columns=" + this.columns + '}';
     }
 }

@@ -1,6 +1,6 @@
-package com.lwl.base.code.generator.db;
+package com.lwl.code.generator.db;
 
-import com.lwl.base.code.generator.model.EntityBean;
+import com.lwl.code.generator.model.EntityBean;
 
 import java.util.List;
 

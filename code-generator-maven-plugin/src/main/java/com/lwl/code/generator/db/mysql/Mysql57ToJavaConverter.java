@@ -1,4 +1,4 @@
-package com.lwl.base.code.generator.db.mysql;
+package com.lwl.code.generator.db.mysql;
 
 /**
  * 转换器 数据库表信息转Java类信息

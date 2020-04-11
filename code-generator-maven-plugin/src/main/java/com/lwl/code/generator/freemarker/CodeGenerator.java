@@ -1,4 +1,4 @@
-package com.lwl.base.code.generator.freemarker;
+package com.lwl.code.generator.freemarker;
 
 /**
  * 代码生成器

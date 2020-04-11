@@ -1,13 +1,15 @@
-package com.lwl.base.code.generator.db;
+package com.lwl.code.generator.db;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lwl.base.code.generator.util.YamlConfigUtil;
-import com.lwl.base.code.generator.config.JdbcConfig;
+import com.lwl.code.generator.config.JdbcConfig;
+import com.lwl.code.generator.util.YamlConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -19,7 +21,7 @@ public class DbHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(DbHelper.class);
     
     private Connection connection = null;
-    private static JdbcConfig jdbcConfig = YamlConfigUtil.jdbcConfig;
+    private static JdbcConfig jdbcConfig = YamlConfigUtil.getJdbcConfig();
 
     static {
         // 验证jdbc驱动是否存在

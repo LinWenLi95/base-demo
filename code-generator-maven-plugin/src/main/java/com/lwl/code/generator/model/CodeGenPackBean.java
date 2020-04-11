@@ -1,7 +1,7 @@
-package com.lwl.base.code.generator.model;
+package com.lwl.code.generator.model;
 
-import com.lwl.base.code.generator.config.CodePackConfig;
-import com.lwl.base.code.generator.util.YamlConfigUtil;
+import com.lwl.code.generator.util.YamlConfigUtil;
+import com.lwl.code.generator.config.CodePackConfig;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
@@ -26,18 +26,22 @@ public class CodeGenPackBean {
     /***/
     private String webPack;
     /***/
-    private CodePackConfig codePackConfig = YamlConfigUtil.codePackConfig;
+    private CodePackConfig codePackConfig = YamlConfigUtil.getCodePackConfig();
 
     private static CodeGenPackBean codeGenPackBean;
 
     public CodeGenPackBean() {
         String packBase = codePackConfig.getPackBase() + ".";
         this.controllerPack = packBase + codePackConfig.getPackController();
-        this.beanPack = packBase + codePackConfig.getPackBean();
         this.servicePack = packBase + codePackConfig.getPackService();
         this.serviceIpmlPack = servicePack + ".impl";
         this.daoPack = packBase + codePackConfig.getPackDao();
-        this.mapperPack = packBase + codePackConfig.getPackMapper();
+        if (!codePackConfig.getPackMapper().startsWith("classpath:")) {
+            this.mapperPack = packBase + codePackConfig.getPackMapper();
+        }else {
+            this.mapperPack = codePackConfig.getPackMapper();
+        }
+        this.beanPack = packBase + codePackConfig.getPackBean();
         this.webPack = codePackConfig.getPackWeb();
     }
 
@@ -82,13 +86,13 @@ public class CodeGenPackBean {
      * @return 文件绝对路径
      */
     private String packOutput(String pack) {
-        if (StringUtils.isEmpty(codePackConfig.getOutputBase())) {
-            String projectName = "\\base-code-generator";
-            String dir = System.getProperty("user.dir");
-            dir = dir.contains(projectName) ? dir : dir + projectName;
-            return String.format("%s\\src\\main\\java\\%s", dir, pack.replaceAll("\\.", "\\\\"));
+        if (pack.startsWith("classpath:")) {
+            pack = pack.replace("classpath:", "");
+            return String.format("%s\\src\\main\\resources\\%s", YamlConfigUtil.priorityPath, pack.replaceAll("\\.", "\\\\"));
+        }else if (StringUtils.isEmpty(codePackConfig.getOutputBase())) {
+            return String.format("%s\\src\\main\\java\\%s", YamlConfigUtil.priorityPath, pack.replaceAll("\\.", "\\\\"));
         }
-        return codePackConfig.getOutputBase() + pack.replaceAll("\\.", "\\\\");
+        return codePackConfig.getOutputBase() + "\\" + pack.replaceAll("\\.", "\\\\");
     }
 
 }

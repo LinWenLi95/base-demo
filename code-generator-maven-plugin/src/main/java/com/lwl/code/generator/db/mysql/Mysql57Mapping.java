@@ -1,4 +1,4 @@
-package com.lwl.base.code.generator.db.mysql;
+package com.lwl.code.generator.db.mysql;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

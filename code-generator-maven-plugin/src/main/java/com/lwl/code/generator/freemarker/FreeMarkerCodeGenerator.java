@@ -1,8 +1,8 @@
-package com.lwl.base.code.generator.freemarker;
+package com.lwl.code.generator.freemarker;
 
-import com.lwl.base.code.generator.db.DbHandler;
-import com.lwl.base.code.generator.db.mysql.Mysql57DbHandler;
-import com.lwl.base.code.generator.model.EntityBean;
+import com.lwl.code.generator.db.DbHandler;
+import com.lwl.code.generator.db.mysql.Mysql57DbHandler;
+import com.lwl.code.generator.model.EntityBean;
 
 import java.util.List;
 

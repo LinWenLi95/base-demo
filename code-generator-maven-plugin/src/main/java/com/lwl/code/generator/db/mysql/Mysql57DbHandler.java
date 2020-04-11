@@ -1,15 +1,13 @@
-package com.lwl.base.code.generator.db.mysql;
-import	java.util.Arrays;
-
+package com.lwl.code.generator.db.mysql;
 import com.alibaba.fastjson.JSONObject;
-import com.lwl.base.code.generator.db.DbHandler;
-import com.lwl.base.code.generator.db.DbHelper;
-import com.lwl.base.code.generator.model.ColumnBean;
-import com.lwl.base.code.generator.model.EntityBean;
+import com.lwl.code.generator.db.DbHelper;
+import com.lwl.code.generator.model.EntityBean;
+import com.lwl.code.generator.db.DbHandler;
+import com.lwl.code.generator.model.ColumnBean;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Mysql数据库处理器类

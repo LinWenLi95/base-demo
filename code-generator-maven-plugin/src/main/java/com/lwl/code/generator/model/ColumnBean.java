@@ -1,6 +1,6 @@
-package com.lwl.base.code.generator.model;
+package com.lwl.code.generator.model;
 
-import com.lwl.base.code.generator.util.StringUtil;
+import com.lwl.code.generator.util.StringUtil;
 import lombok.Data;
 
 /**

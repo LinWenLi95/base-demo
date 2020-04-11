@@ -1,4 +1,4 @@
-package com.lwl.base.code.generator.util;
+package com.lwl.code.generator.util;
 
 import org.springframework.util.StringUtils;
 

@@ -1,4 +1,4 @@
-package com.lwl.base.code.generator.config;
+package com.lwl.code.generator.config;
 
 import lombok.Data;
 

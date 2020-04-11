@@ -1,6 +1,6 @@
-package com.lwl.base.code.generator.db.mysql;
+package com.lwl.code.generator.db.mysql;
 
-import com.lwl.base.code.generator.model.EntityBean;
+import com.lwl.code.generator.model.EntityBean;
 import lombok.Data;
 
 import java.util.List;

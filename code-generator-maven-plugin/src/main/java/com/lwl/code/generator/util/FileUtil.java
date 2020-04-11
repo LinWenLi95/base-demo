@@ -1,10 +1,13 @@
-package com.lwl.base.code.generator.util;
+package com.lwl.code.generator.util;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 
 /**
  * @author P001
  */
+@Slf4j
 public class FileUtil {
 
     /**
@@ -16,7 +19,7 @@ public class FileUtil {
         if (!file.exists()) {
             boolean mkdirs = file.mkdirs();
             if (mkdirs) {
-                System.out.println(String.format("目录:%s 生成成功", path));
+                log.info(String.format("目录:%s 生成成功", path));
             }
         }
     }
