@@ -10,6 +10,10 @@
     <!--1.打包方式选择maven-plugin-->
     <packaging>maven-plugin</packaging>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
         <!--2.maven插件必须添加的依赖-->
         <dependency>

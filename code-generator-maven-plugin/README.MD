@@ -3,7 +3,7 @@
 * 适用数据库：MySQL
 * 模板引擎：FreeMarker
 
-#### 实现原理：
+#### 实现原理/步骤：
 1. 在application.yml中自定义配置信息：
     * JDBC配置
     * 代码生成位置配置
@@ -79,6 +79,7 @@ code-generator:
 附：
 * 如果要自定义生成代码的模板文件可在引用代码生成器插件的项目的resources目录下创建templates文件夹，在templates下放置以下名称的ftl文件则可覆盖代码生成器插件中默认的*.ftl.
 * 如果想直接运行代码生成器插件项目进行生成代码，可在配置完application.yml后将CodeGenerateMojo的execute()方法改成main方法直接运行
+* 如果想生成其他数据库的表，需要将实现原理/步骤的3、4酌情修改
 ```
 bean.ftl
 controller.ftl
