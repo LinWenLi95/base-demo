@@ -1,4 +1,4 @@
-package com.lwl.base.spring.security.config.service;
+package com.lwl.base.spring.security.config;
 import com.lwl.base.spring.security.entity.pojo.SysRole;
 import com.lwl.base.spring.security.entity.pojo.SysUser;
 import com.lwl.base.spring.security.service.SysRoleService;
@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
