@@ -17,6 +17,7 @@ public class TestController {
 
     @GetMapping("put")
     public String put(String msg){
+//        https://blog.csdn.net/qq_35387940/article/details/100514134
 //        rabbitTemplate.convertAndSend("testDirectExchange", "TestDirectRouting", msg);
 //        rabbitTemplate.convertAndSend("testFanoutExchange", null, msg);
         rabbitTemplate.convertAndSend("testTopicExchange", "TestTopicRouting", msg);
