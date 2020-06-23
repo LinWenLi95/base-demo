@@ -4,6 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * request对象数据操作工具类
+ * @author linwenli
+ */
 public class HttpRequestUtil {
 
     /**

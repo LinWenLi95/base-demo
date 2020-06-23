@@ -2,6 +2,10 @@ package com.lwl.base.common.util;
 
 import org.springframework.util.StringUtils;
 
+/**
+ * 字符串工具类
+ * @author linwenli
+ */
 public class StringUtil {
 
     /**
