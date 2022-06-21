@@ -24,7 +24,7 @@
         <lombok.version>1.18.10</lombok.version>
         <fastjson.version>1.2.62</fastjson.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
-        <mysql-connector.version>8.0.18</mysql-connector.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
         <hikaricp.version>3.4.1</hikaricp.version>
         <netty.resolver.version>4.1.48.Final</netty.resolver.version>
         <jedis.version>3.2.0</jedis.version>
